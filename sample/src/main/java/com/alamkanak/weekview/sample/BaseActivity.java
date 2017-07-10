@@ -1,11 +1,13 @@
 package com.alamkanak.weekview.sample;
 
+import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -24,6 +26,7 @@ import java.util.Locale;
  * Website: http://alamkanak.github.io
  */
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -57,6 +60,18 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         setupDateTimeInterpreter(false);
     }
 
+
+    // <Matthew Staudigel> 7-9-17
+    // Click on an event block and the event's details will be displayed in a new window
+    public void viewEvent(WeekViewEvent event) {
+
+        Intent intent = new Intent(this, ViewEvent.class);
+        EditText editText;
+        editText = (EditText) findViewById(R.id.editText);
+        String event_Info = event.getName();
+        intent.putExtra(EXTRA_MESSAGE, event_Info);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,6 +162,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
+        viewEvent(event);
         Toast.makeText(this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
     }
 
