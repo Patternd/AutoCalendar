@@ -12,18 +12,15 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
-
         <activity
             android:name=".BasicActivity"
-            android:label="@string/title_activity_basic"
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>/>
-
+            android:label="@string/title_activity_basic" />
         <activity
             android:name=".AsynchronousActivity"
             android:label="@string/title_activity_asynchronous" />
@@ -34,8 +31,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BasicActivity" />
         </activity>
+        <activity android:name=".addNewEntry">
+            android:parentActivityName=".BasicActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BasicActivity" />
+        </activity>
+        <activity android:name=".addEvent"
+            android:parentActivityName=".addNewEntry">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".addNewEntry" />
 
-
+        </activity>
     </application>
 
 </manifest>

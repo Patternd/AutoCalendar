@@ -1,3 +1,25 @@
+// BaseActivity.java
+//
+// Description: Main display of the user's calendar
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
 package com.alamkanak.weekview.sample;
 
 import android.content.Intent;
@@ -19,12 +41,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-/**
- * This is a base activity which contains week view and all the codes necessary to initialize the
- * week view.
- * Created by Raquib-ul-Alam Kanak on 1/3/2014.
- * Website: http://alamkanak.github.io
- */
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private static final int TYPE_DAY_VIEW = 1;
@@ -70,6 +86,11 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         editText = (EditText) findViewById(R.id.editText);
         String event_Info = event.getName();
         intent.putExtra(EXTRA_MESSAGE, event_Info);
+        startActivity(intent);
+    }
+
+    public void addNewEntry() {
+        Intent intent = new Intent(this, addNewEntry.class);
         startActivity(intent);
     }
 
@@ -173,6 +194,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
     @Override
     public void onEmptyViewLongPress(Calendar time) {
+        addNewEntry();
         Toast.makeText(this, "Empty view long pressed: " + getEventTitle(time), Toast.LENGTH_SHORT).show();
     }
 
