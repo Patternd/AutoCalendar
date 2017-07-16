@@ -31,6 +31,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BasicActivity" />
         </activity>
+
         <activity android:name=".addNewEntry">
             android:parentActivityName=".BasicActivity">
             <meta-data
@@ -44,6 +45,21 @@
                 android:value=".addNewEntry" />
 
         </activity>
+
+        <activity android:name=".addOneTimeEvent"
+            android:parentActivityName=".addEvent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".addEvent" />
+        </activity>
+
+        <activity android:name=".verifyEventDetails"
+            android:parentActivityName=".addOneTimeEvent">
+            <meta-data
+                android:name="android:support.PARENT_ACTIVITY"
+                android:value=".addOneTimeEvent" />
+        </activity>
+
     </application>
 
 </manifest>

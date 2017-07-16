@@ -11,15 +11,6 @@
 //
 //
 
-
-
-
-
-
-
-
-
-
 package com.alamkanak.weekview.sample;
 
 import android.content.Intent;
