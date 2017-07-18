@@ -73,6 +73,15 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         startActivity(intent);
     }
 
+    public void modifyEvent(WeekViewEvent event) {
+
+        Intent intent = new Intent(this, ModifyEvent.class);
+
+
+        String event_Info = event.getName();
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -168,6 +177,8 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
+        modifyEvent(event);
+        //
         Toast.makeText(this, "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
     }
 
