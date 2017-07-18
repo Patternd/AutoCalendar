@@ -18,7 +18,7 @@ import java.util.Calendar;
 
 public class addOneTimeEvent extends AppCompatActivity {
 
-    Intent intent = new Intent(this, verifyEventDetails.class);
+    eventData event_Data;
     EditText editText;
     public static final String EXTRA_MESSAGE0 = "0";
     public static final String EXTRA_MESSAGE1 = "1";
@@ -38,6 +38,7 @@ public class addOneTimeEvent extends AppCompatActivity {
 
 
         final Button button5 = (Button) findViewById(R.id.button5);
+        getIntent().getSerializableExtra("eventData");
         button5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setNewEventDetails(v);
@@ -47,7 +48,7 @@ public class addOneTimeEvent extends AppCompatActivity {
 
     public void setNewEventDetails(View view) {
 
-
+        Intent intent = new Intent(this, verifyEventDetails.class);
         editText = (EditText) findViewById(R.id.Start_Hour);
         String event_StartHour = editText.getText().toString();
 
@@ -92,6 +93,7 @@ public class addOneTimeEvent extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE8,event_EndMonth);
         intent.putExtra(EXTRA_MESSAGE9,event_StartDay);
         intent.putExtra(EXTRA_MESSAGE10,event_EndDay);
+
 
         startActivity(intent);
 

@@ -13,10 +13,14 @@ import java.util.List;
  */
 public class BasicActivity extends BaseActivity {
 
-    @Override
-    public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+    List<WeekViewEvent> events;
+
+/*    @Override
+    public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         // Populate the week view with some events.
-        List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+
+        events = new ArrayList<WeekViewEvent>();
+
 
         Calendar startTime = Calendar.getInstance();
         startTime.set(Calendar.HOUR_OF_DAY, 3);
@@ -86,6 +90,11 @@ public class BasicActivity extends BaseActivity {
         events.add(event);
         
 
+
+        return events;
+    }*/
+
+    public List<? extends WeekViewEvent> getCalendar() {
         return events;
     }
 

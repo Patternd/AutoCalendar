@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
+
 
 public class addNewEntry extends AppCompatActivity {
+
+    eventData event_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +21,7 @@ public class addNewEntry extends AppCompatActivity {
         // Creates an OnClick listener to NEW EVENT button
         // Calls addNewEvent() when button is clicked
         final Button button2 = (Button) findViewById(R.id.button2);
-
+        getIntent().getSerializableExtra("eventData");
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 addNewEvent(v);
@@ -28,6 +32,7 @@ public class addNewEntry extends AppCompatActivity {
     // Take the user to the addEvent view
     public void addNewEvent(View view) {
         Intent intent = new Intent(this, addEvent.class);
+        intent.putExtra("eventData", (Serializable) event_data);
         startActivity(intent);
     }
 }

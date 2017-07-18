@@ -43,7 +43,7 @@
         android:textAlignment="viewStart"
         android:textAllCaps="true"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/v_priority"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -70,7 +70,7 @@
         android:textAlignment="viewStart"
         android:textAllCaps="true"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/v_location"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -90,14 +90,17 @@
         android:id="@+id/textView18"
         android:layout_width="103dp"
         android:layout_height="35dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="28dp"
         android:layout_marginTop="17dp"
         android:text="Start Time"
         android:textAlignment="viewStart"
         android:textAllCaps="true"
         android:textStyle="bold"
         app:layout_constraintRight_toLeftOf="@+id/v_startTime"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
         android:id="@+id/v_startTime"
@@ -140,7 +143,7 @@
         android:id="@+id/textView22"
         android:layout_width="103dp"
         android:layout_height="35dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="15dp"
         android:text="Start Date"
         android:textAlignment="viewStart"
@@ -160,13 +163,14 @@
         android:textAlignment="textEnd"
         app:layout_constraintLeft_toRightOf="@+id/textView22"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/v_EndTime" />
+        app:layout_constraintTop_toBottomOf="@+id/v_EndTime"
+        app:layout_constraintHorizontal_bias="0.714" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="103dp"
         android:layout_height="35dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginTop="15dp"
         android:text="End Date"
         android:textAlignment="textStart"
@@ -186,7 +190,8 @@
         app:layout_constraintLeft_toRightOf="@+id/textView24"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.714" />
 
     <TextView
         android:id="@+id/textView26"

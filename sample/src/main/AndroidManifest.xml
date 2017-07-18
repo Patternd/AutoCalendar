@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.alamkanak.weekview.sample">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,7 +12,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,10 +23,12 @@
         </activity>
         <activity
             android:name=".BasicActivity"
-            android:label="@string/title_activity_basic" />
+            android:label="@string/title_activity_basic"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".AsynchronousActivity"
-            android:label="@string/title_activity_asynchronous" />
+            android:label=""
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".ViewEvent"
             android:parentActivityName=".BasicActivity">
@@ -31,35 +36,45 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BasicActivity" />
         </activity>
-
         <activity android:name=".addNewEntry">
             android:parentActivityName=".BasicActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BasicActivity" />
         </activity>
-        <activity android:name=".addEvent"
+        <activity
+            android:name=".addEvent"
             android:parentActivityName=".addNewEntry">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".addNewEntry" />
-
         </activity>
-
-        <activity android:name=".addOneTimeEvent"
+        <activity
+            android:name=".addOneTimeEvent"
             android:parentActivityName=".addEvent">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".addEvent" />
         </activity>
-
-        <activity android:name=".verifyEventDetails"
+        <activity
+            android:name=".verifyEventDetails"
             android:parentActivityName=".addOneTimeEvent">
             <meta-data
                 android:name="android:support.PARENT_ACTIVITY"
                 android:value=".addOneTimeEvent" />
         </activity>
-
+        <activity
+            android:name=".Title"
+            android:screenOrientation="landscape"
+            android:parentActivityName=".BasicActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BasicActivity" />
+        </activity>
+        <activity android:name=".EndTime"
+            android:screenOrientation="landscape"
+            android:parentActivityName=".Title">
+        </activity>
     </application>
 
 </manifest>
