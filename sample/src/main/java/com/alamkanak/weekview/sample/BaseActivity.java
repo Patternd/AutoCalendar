@@ -1,11 +1,13 @@
 package com.alamkanak.weekview.sample;
 
+import android.content.Intent;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.DateTimeInterpreter;
@@ -29,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     private static final int TYPE_WEEK_VIEW = 3;
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
     private WeekView mWeekView;
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
 
     @Override
@@ -55,6 +58,15 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         // Set up a date time interpreter to interpret how the date and time will be formatted in
         // the week view. This is optional.
         setupDateTimeInterpreter(false);
+    }
+
+
+    public void viewEvent(WeekViewEvent event) {
+        Intent intent = new Intent(this, viewEvent.class);
+        EditText editText = (EditText) findViewById(R.id.editText);
+        String message = event.getName();
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
 
@@ -148,6 +160,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
         Toast.makeText(this, "Clicked " + event.getName(), Toast.LENGTH_SHORT).show();
+        viewEvent(event);
     }
 
     @Override
