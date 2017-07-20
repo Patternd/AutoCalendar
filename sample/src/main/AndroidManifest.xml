@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.alamkanak.weekview.sample">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,8 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            >
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,11 +22,11 @@
         <activity
             android:name=".BasicActivity"
             android:label="@string/title_activity_basic"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".AsynchronousActivity"
             android:label=""
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ViewEvent"
             android:parentActivityName=".BasicActivity">
@@ -65,15 +63,33 @@
         </activity>
         <activity
             android:name=".Title"
-            android:screenOrientation="landscape"
-            android:parentActivityName=".BasicActivity">
+            android:parentActivityName=".BasicActivity"
+            android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BasicActivity" />
         </activity>
-        <activity android:name=".EndTime"
-            android:screenOrientation="landscape"
-            android:parentActivityName=".Title">
+        <activity
+            android:name=".EndTime"
+            android:parentActivityName=".Title"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".eventType"
+            android:parentActivityName=".BasicActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity
+            android:name=".Location"
+            android:parentActivityName=".EndTime"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity android:name=".Description"
+            android:parentActivityName=".Location"
+            android:screenOrientation="landscape">
+
         </activity>
     </application>
 
