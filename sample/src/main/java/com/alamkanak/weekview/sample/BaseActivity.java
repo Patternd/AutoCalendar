@@ -34,10 +34,14 @@ import com.alamkanak.weekview.WeekViewEvent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Random;
 
+import static com.alamkanak.weekview.sample.Description.description_identifier;
 import static com.alamkanak.weekview.sample.EndTime.end_hour_identifier;
 import static com.alamkanak.weekview.sample.EndTime.end_minute_identifier;
+import static com.alamkanak.weekview.sample.Location.location_identifier;
 import static com.alamkanak.weekview.sample.Title.title_identifier;
+import static com.alamkanak.weekview.sample.eventType.eventType_identifier;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
@@ -50,6 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     private ArrayList<WeekViewEvent> mNewEvents;
     private eventData event_data = new eventData();
     Calendar GlobalTime;
+    WeekViewEvent event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
     // <Matt> Setting the eventVariable of the event. This could be title, description, priority, etc
     //
-    public void setEventVariable(int param) {
+    public void setEntryVariable(int param) {
         Intent intent;
         switch (param) {
             case 0:
@@ -105,6 +110,42 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 intent = new Intent(this, EndTime.class);
                 intent.putExtra("eventData", (Serializable) event_data);
                 startActivityForResult(intent, 1);
+                break;
+            case 2:
+                intent = new Intent(this, eventType.class);
+                intent.putExtra("eventData", (Serializable) event_data);
+                startActivityForResult(intent,2);
+                break;
+            case 3:
+                intent = new Intent(this, Location.class);
+                intent.putExtra("eventData", (Serializable) event_data);
+                startActivityForResult(intent,3);
+                break;
+            case 4:
+                intent = new Intent(this, Description.class);
+                intent.putExtra("eventData", (Serializable) event_data);
+                startActivityForResult(intent,4);
+                break;
+        }
+    }
+
+    public void setEventColor() {
+        Random rand = new Random();
+
+        int  n = rand.nextInt(4) + 1;
+
+        switch (n) {
+            case (1):
+                event.setColor(getResources().getColor(R.color.event_color_01));
+                break;
+            case (2):
+                event.setColor(getResources().getColor(R.color.event_color_02));
+                break;
+            case (3):
+                event.setColor(getResources().getColor(R.color.event_color_03));
+                break;
+            case (4):
+                event.setColor(getResources().getColor(R.color.event_color_04));
                 break;
         }
     }
@@ -119,7 +160,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 if (resultCode == Activity.RESULT_OK) {
                     String newText = data.getStringExtra(title_identifier);
                     event_data.title = newText;
-                    setEventVariable(1);
+                    setEntryVariable(1);
                 }
                 break;
             }
@@ -129,16 +170,54 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                     int Minute = data.getIntExtra(end_minute_identifier, 0);
                     event_data.endHour = Hour;
                     event_data.endMinute = Minute;
+                    setEntryVariable(3);
                 }
                 break;
             }
+            case (2) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    int type = data.getIntExtra(eventType_identifier, 0);
+                    event_data.eventType = type;
+
+                    if (type == 0) {
+                        //call the task activity series
+                        break;
+                    }
+                    else if (type == 1) {
+                        setEntryVariable(0);
+                    }
+                }
+                break;
+            }
+
+            case (3) : {
+                if (resultCode == Activity.RESULT_OK) {
+
+                    String location = data.getStringExtra(location_identifier);
+                    event_data.location = location;
+                    setEntryVariable(4);
+                    break;
+                }
+                break;
+            }
+
+            case (4) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    String description = data.getStringExtra(description_identifier);
+                    event_data.description = description;
+                }
+            }
         }
-        if (requestCode == 1) {
+        if (requestCode == 4) {
             Calendar endTime = (Calendar) GlobalTime.clone();
-            endTime.add(Calendar.HOUR, event_data.endHour);
-            endTime.add(Calendar.MINUTE, event_data.endMinute);
+            endTime.set(Calendar.HOUR, event_data.endHour);
+            endTime.set(Calendar.MINUTE, event_data.endMinute);
+
+
             // Create a new event.
-            WeekViewEvent event = new WeekViewEvent(20, event_data.title, GlobalTime, endTime);
+            event = new WeekViewEvent(20, event_data.title, GlobalTime, endTime, event_data.description);
+            setEventColor();
+            event.setLocation(event_data.location);
             mNewEvents.add(event);
 
             // Refresh the week view. onMonthChange will be called again.
@@ -298,7 +377,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         // <Matt> Initial call to first Title dialog. Also, set a global variable for time LMAO
         GlobalTime = time;
 
-        setEventVariable(0);
+        setEntryVariable(2);
 
 
 

@@ -80,7 +80,7 @@ public class verifyEventDetails extends AppCompatActivity {
                 Calendar endTime = (Calendar) startTime.clone();
                 endTime.add(Calendar.HOUR, Integer.parseInt(EndHour));
                 endTime.set(Calendar.MONTH, Integer.parseInt(EndMonth));
-                WeekViewEvent event = new WeekViewEvent(1, Title, startTime, endTime);
+                WeekViewEvent event = new WeekViewEvent(1, Title, startTime, endTime, "");
                 event.setColor(getResources().getColor(R.color.event_color_01));
 
                 setContentView(R.layout.activity_verify_event_details);
