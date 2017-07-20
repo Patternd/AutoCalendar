@@ -37,7 +37,7 @@
         tools:layout_editor_absoluteX="275dp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/startDate"
         android:layout_width="222dp"
         android:layout_height="53dp"
         android:layout_marginLeft="8dp"
@@ -60,5 +60,5 @@
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/startDate" />
 </android.support.constraint.ConstraintLayout>

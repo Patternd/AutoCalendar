@@ -9,18 +9,7 @@ import android.widget.TextView;
 
 public class ViewEvent extends AppCompatActivity {
 
-   // @Override
-   // protected void onCreate(Bundle savedInstanceState) {
-      //  super.onCreate(savedInstanceState);
-      //  setContentView(R.layout.activity_view_event);
 
-      //  Intent intent = getIntent();
-      //  String event_Information = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE);
-
-      //  TextView textView;
-      //  textView = (TextView) findViewById(R.id.textView1);
-      //  textView.setText(event_Information);
-   // }
       @Override
       protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
@@ -31,7 +20,8 @@ public class ViewEvent extends AppCompatActivity {
           String StartTime = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE1);
           String EndTime = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE2);
           String Location = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE3);
-          String Date = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE4);
+          String StartDate = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE4);
+          String EndDate = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE6);
           String Description = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE5);
 
 
@@ -47,8 +37,11 @@ public class ViewEvent extends AppCompatActivity {
           textView = (TextView) findViewById(R.id.locView);
           textView.setText(Location);
 
-          textView = (TextView) findViewById(R.id.textView4);
-          textView.setText(Date);
+          textView = (TextView) findViewById(R.id.startDate);
+          textView.setText(StartDate);
+
+          textView = (TextView) findViewById(R.id.endDate);
+          textView.setText(EndDate);
 
           textView = (TextView) findViewById(R.id.descripText);
           textView.setText(Description);
