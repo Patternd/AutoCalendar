@@ -21,7 +21,6 @@ public class ViewEvent extends AppCompatActivity {
           String EndTime = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE2);
           String Location = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE3);
           String StartDate = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE4);
-          String EndDate = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE6);
           String Description = intent.getStringExtra(BaseActivity.EXTRA_MESSAGE5);
 
 
@@ -39,9 +38,6 @@ public class ViewEvent extends AppCompatActivity {
 
           textView = (TextView) findViewById(R.id.startDate);
           textView.setText(StartDate);
-
-          textView = (TextView) findViewById(R.id.endDate);
-          textView.setText(EndDate);
 
           textView = (TextView) findViewById(R.id.descripText);
           textView.setText(Description);

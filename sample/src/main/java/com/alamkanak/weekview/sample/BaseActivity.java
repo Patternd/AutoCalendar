@@ -46,21 +46,23 @@ import static java.lang.String.valueOf;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
+
     public static final String EXTRA_MESSAGE0 = "0";
     public static final String EXTRA_MESSAGE1 = "1";
     public static final String EXTRA_MESSAGE2 = "2";
     public static final String EXTRA_MESSAGE3 = "3";
     public static final String EXTRA_MESSAGE4 = "4";
     public static final String EXTRA_MESSAGE5 = "5";
-    public static final String EXTRA_MESSAGE6 = "6";
 
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
     private int mWeekViewType = TYPE_THREE_DAY_VIEW;
+
     private WeekView mWeekView;
     private ArrayList<WeekViewEvent> mNewEvents;
     private eventData event_data = new eventData();
+
     Calendar GlobalTime;
     WeekViewEvent event;
 
@@ -217,15 +219,12 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
             }
         }
         if (requestCode == 4) {
-<<<<<<< HEAD
             //Calendar calendar = Calendar.getInstance();
-=======
             int AM_PM = GlobalTime.get(Calendar.AM_PM);
             if (AM_PM == 1) {
                 GlobalTime.set(Calendar.AM_PM, 0);
                 GlobalTime.set(Calendar.HOUR, event_data.startHour);
             }
->>>>>>> c6952d0899e7de08bfb2a24fb903db993f9966d3
             Calendar endTime = (Calendar) GlobalTime.clone();
             endTime.set(Calendar.HOUR, event_data.endHour);
             endTime.set(Calendar.HOUR_OF_DAY, event_data.endHour);
@@ -326,8 +325,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
 
         String Location = event.getLocation();
-        String StartDate = valueOf(event_data.startMonth+1) + "/" + valueOf(event_data.startDay);
-        String EndDate = valueOf(event_data.endMonth+1) + "/" + valueOf(event_data.endDay);
+
+        String StartDate = valueOf(event_data.startMonth+1) + "/" + valueOf(event_data.startDay) + " - " + valueOf(event_data.endMonth+1) + "/" + valueOf(event_data.endDay);
+
         String Description = event.getDescription().toString();
 
         intent.putExtra(EXTRA_MESSAGE0, Title);
@@ -335,7 +335,6 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         intent.putExtra(EXTRA_MESSAGE2, EndTime);
         intent.putExtra(EXTRA_MESSAGE3, Location);
         intent.putExtra(EXTRA_MESSAGE4, StartDate);
-        intent.putExtra(EXTRA_MESSAGE6, EndDate);
         intent.putExtra(EXTRA_MESSAGE5, Description);
 
         startActivity(intent);
