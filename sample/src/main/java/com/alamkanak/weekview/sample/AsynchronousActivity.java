@@ -26,7 +26,7 @@ public class AsynchronousActivity extends BaseActivity implements Callback<List<
     boolean calledNetwork = false;
 
     @Override
-    public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
+    public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
 
         // Download events from network if it hasn't been done already. To understand how events are
         // downloaded using retrofit, visit http://square.github.io/retrofit

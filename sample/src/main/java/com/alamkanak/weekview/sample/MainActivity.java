@@ -25,14 +25,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        findViewById(R.id.buttonAsynchronous).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AsynchronousActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 }

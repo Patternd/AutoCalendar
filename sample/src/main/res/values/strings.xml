@@ -8,4 +8,11 @@
     <string name="title_activity_basic">Your Calendar</string>
     <string name="title_activity_asynchronous">Your Tasks</string>
     <string name="async_error">Could not download events from the internet</string>
+    <string name="titleText">Title</string>
+    <string name="startTime">Start Time</string>
+    <string name="endTime">End Time</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="startdateView">Start Date</string>
+    <string name="enddateView">End Date</string>
 </resources>

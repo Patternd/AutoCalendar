@@ -11,24 +11,31 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>/>
+            </intent-filter>
         </activity>
-
-
         <activity
             android:name=".BasicActivity"
-            android:label="@string/title_activity_basic"/>
-
+            android:label="@string/title_activity_basic"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".AsynchronousActivity"
-            android:label="@string/title_activity_asynchronous" />
+            android:label=""
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ViewEvent"
+            android:parentActivityName=".BasicActivity"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BasicActivity" />
+        </activity>
+        <activity android:name=".addNewEntry">
             android:parentActivityName=".BasicActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,6 +66,57 @@
                 android:value=".ModifyEvent" />
         </activity>
 
+        <activity
+            android:name=".addEvent"
+            android:parentActivityName=".addNewEntry">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".addNewEntry" />
+        </activity>
+        <activity
+            android:name=".addOneTimeEvent"
+            android:parentActivityName=".addEvent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".addEvent" />
+        </activity>
+        <activity
+            android:name=".verifyEventDetails"
+            android:parentActivityName=".addOneTimeEvent">
+            <meta-data
+                android:name="android:support.PARENT_ACTIVITY"
+                android:value=".addOneTimeEvent" />
+        </activity>
+        <activity
+            android:name=".Title"
+            android:parentActivityName=".BasicActivity"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BasicActivity" />
+        </activity>
+        <activity
+            android:name=".EndTime"
+            android:parentActivityName=".Title"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".eventType"
+            android:parentActivityName=".BasicActivity"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity
+            android:name=".Location"
+            android:parentActivityName=".EndTime"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity android:name=".Description"
+            android:parentActivityName=".Location"
+            android:screenOrientation="landscape">
+
+        </activity>
     </application>
 
 </manifest>
