@@ -217,9 +217,18 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
             }
         }
         if (requestCode == 4) {
+<<<<<<< HEAD
             //Calendar calendar = Calendar.getInstance();
+=======
+            int AM_PM = GlobalTime.get(Calendar.AM_PM);
+            if (AM_PM == 1) {
+                GlobalTime.set(Calendar.AM_PM, 0);
+                GlobalTime.set(Calendar.HOUR, event_data.startHour);
+            }
+>>>>>>> c6952d0899e7de08bfb2a24fb903db993f9966d3
             Calendar endTime = (Calendar) GlobalTime.clone();
             endTime.set(Calendar.HOUR, event_data.endHour);
+            endTime.set(Calendar.HOUR_OF_DAY, event_data.endHour);
             endTime.set(Calendar.MINUTE, event_data.endMinute);
             //endTime.set(Calendar.DAY_OF_MONTH, calendar.DAY_OF_MONTH);
             //endTime.set(Calendar.MONTH, calendar.MONTH);
@@ -439,11 +448,17 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         // <Matt> Initial call to first Title dialog. Also, set a global variable for time LMAO
         GlobalTime = time;
 
-        event_data.startHour = GlobalTime.get(Calendar.HOUR);
-        event_data.startMinute = GlobalTime.get(Calendar.MINUTE);
-
-        event_data.endHour = GlobalTime.get(Calendar.HOUR);
-        event_data.endMinute = GlobalTime.get(Calendar.MINUTE);
+        int AM_PM = GlobalTime.get(Calendar.AM_PM);
+        if (AM_PM == 0) {
+            event_data.startHour = GlobalTime.get(Calendar.HOUR);
+            event_data.startMinute = GlobalTime.get(Calendar.MINUTE);
+        }
+        else if (AM_PM == 1) {
+            GlobalTime.set(Calendar.AM_PM, 0);
+            event_data.startHour = GlobalTime.get(Calendar.HOUR)+12;
+            GlobalTime.set(Calendar.HOUR, event_data.startHour);
+            event_data.startMinute = GlobalTime.get(Calendar.MINUTE);
+        }
 
         event_data.startMonth = GlobalTime.get(Calendar.MONTH);
         event_data.endMonth = GlobalTime.get(Calendar.MONTH);
