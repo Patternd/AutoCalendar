@@ -42,6 +42,7 @@ import static com.alamkanak.weekview.sample.EndTime.end_minute_identifier;
 import static com.alamkanak.weekview.sample.Location.location_identifier;
 import static com.alamkanak.weekview.sample.Title.title_identifier;
 import static com.alamkanak.weekview.sample.eventType.eventType_identifier;
+import static java.lang.String.valueOf;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
@@ -51,6 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     public static final String EXTRA_MESSAGE3 = "3";
     public static final String EXTRA_MESSAGE4 = "4";
     public static final String EXTRA_MESSAGE5 = "5";
+    public static final String EXTRA_MESSAGE6 = "6";
+
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -214,16 +217,21 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
             }
         }
         if (requestCode == 4) {
+<<<<<<< HEAD
+            //Calendar calendar = Calendar.getInstance();
+=======
             int AM_PM = GlobalTime.get(Calendar.AM_PM);
             if (AM_PM == 1) {
                 GlobalTime.set(Calendar.AM_PM, 0);
                 GlobalTime.set(Calendar.HOUR, event_data.startHour);
             }
+>>>>>>> c6952d0899e7de08bfb2a24fb903db993f9966d3
             Calendar endTime = (Calendar) GlobalTime.clone();
             endTime.set(Calendar.HOUR, event_data.endHour);
             endTime.set(Calendar.HOUR_OF_DAY, event_data.endHour);
             endTime.set(Calendar.MINUTE, event_data.endMinute);
-
+            //endTime.set(Calendar.DAY_OF_MONTH, calendar.DAY_OF_MONTH);
+            //endTime.set(Calendar.MONTH, calendar.MONTH);
 
             // Create a new event.
             event = new WeekViewEvent(20, event_data.title, GlobalTime, endTime, event_data.description);
@@ -281,43 +289,53 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         String Title = event.getName();
         String tmpMinute = "";
         String tmp1Minute = "";
-        String tmpHour = "";
-        String tmp1Hour = "";
         String StartTime = "";
         String EndTime = "";
 
-        if(event_data.startMinute <= 9){
+        if(event_data.startMinute <= 9 && event_data.startHour < 12){
             tmpMinute = "0" + event_data.startMinute;
-            StartTime = String.valueOf(event_data.startHour) + ":" + String.valueOf(tmpMinute);
+            StartTime = valueOf(event_data.startHour) + ":" + valueOf(tmpMinute) + " AM";
         }
-        else if(event_data.startHour > 12){
-            StartTime = String.valueOf((event_data.startHour - 12));
+        else if(event_data.startMinute <= 9 && event_data.startHour > 12){
+            tmpMinute = "0" + event_data.startMinute;
+            StartTime = valueOf(event_data.startHour - 12) + ":" + valueOf(tmpMinute) + " PM";
+        }
+        else if(event_data.startHour > 12) {
+            StartTime = valueOf((event_data.startHour - 12) + ":" + valueOf(event_data.startMinute) + " PM");
         }
         else {
-            StartTime = String.valueOf(event_data.startHour) + ":" + String.valueOf(event_data.startMinute);
+            StartTime = valueOf(event_data.startHour) + ":" + valueOf(event_data.startMinute) + " AM";
         }
 
-        if(event_data.endMinute <= 9){
+        if(event_data.endMinute <= 9 && event_data.endHour < 12){
             tmp1Minute = "0" + event_data.endMinute;
-            EndTime = String.valueOf(event_data.endHour) + ":" + String.valueOf(tmp1Minute);
+            EndTime = valueOf(event_data.endHour) + ":" + valueOf(tmp1Minute) + " AM";
+        }
+        else if(event_data.endMinute <= 9 && event_data.endHour > 12){
+            tmp1Minute = "0" + event_data.endMinute;
+            EndTime = valueOf(event_data.endHour - 12) + ":" + valueOf(tmp1Minute) + " PM";
         }
         else if(event_data.endHour > 12) {
-            EndTime = String.valueOf((event_data.endHour - 12));
+            EndTime = valueOf((event_data.endHour - 12) + ":" + valueOf(event_data.endMinute) + " PM");
         }
         else {
-            EndTime = String.valueOf(event_data.endHour) + ":" + String.valueOf(event_data.endMinute);
+            EndTime = valueOf(event_data.endHour) + ":" + valueOf(event_data.endMinute) + " AM";
         }
+
+
 
 
         String Location = event.getLocation();
-        //String Date = calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
+        String StartDate = valueOf(event_data.startMonth+1) + "/" + valueOf(event_data.startDay);
+        String EndDate = valueOf(event_data.endMonth+1) + "/" + valueOf(event_data.endDay);
         String Description = event.getDescription().toString();
 
         intent.putExtra(EXTRA_MESSAGE0, Title);
         intent.putExtra(EXTRA_MESSAGE1, StartTime);
         intent.putExtra(EXTRA_MESSAGE2, EndTime);
         intent.putExtra(EXTRA_MESSAGE3, Location);
-        //intent.putExtra(EXTRA_MESSAGE4, Date);
+        intent.putExtra(EXTRA_MESSAGE4, StartDate);
+        intent.putExtra(EXTRA_MESSAGE6, EndDate);
         intent.putExtra(EXTRA_MESSAGE5, Description);
 
         startActivity(intent);
@@ -395,7 +413,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 // the week day name. Hence we get the first char programmatically.
                 // Details: http://stackoverflow.com/questions/16959502/get-one-letter-abbreviation-of-week-day-of-a-date-in-java#answer-16959657
                 if (shortDate)
-                    weekday = String.valueOf(weekday.charAt(0));
+                    weekday = valueOf(weekday.charAt(0));
                 return weekday.toUpperCase() + format.format(date.getTime());
             }
 
@@ -456,6 +474,17 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
             event_data.startMinute = GlobalTime.get(Calendar.MINUTE);
         }
 
+<<<<<<< HEAD
+=======
+        event_data.startMonth = GlobalTime.get(Calendar.MONTH);
+        event_data.endMonth = GlobalTime.get(Calendar.MONTH);
+
+        event_data.startDay = GlobalTime.get(Calendar.DAY_OF_MONTH);
+        event_data.endDay = GlobalTime.get(Calendar.DAY_OF_MONTH);
+
+        setEntryVariable(2);
+
+>>>>>>> f2acdd5c205244f3fada26a7b8dc8178c52bb5d1
 
 
         setEntryVariable(2);
