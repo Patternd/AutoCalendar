@@ -41,7 +41,11 @@ import static com.alamkanak.weekview.sample.Title.title_identifier;
 
 
 public abstract class BaseActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener, WeekView.EmptyViewLongPressListener {
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public static final String EXTRA_MESSAGE0 = "0";
+    public static final String EXTRA_MESSAGE1 = "1";
+    public static final String EXTRA_MESSAGE2 = "2";
+    public static final String EXTRA_MESSAGE3 = "3";
+    public static final String EXTRA_MESSAGE4 = "4";
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -185,12 +189,23 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     // <Matthew Staudigel> 7-9-17
     // Click on an event block and the event's details will be displayed in a new window
     public void viewEvent(WeekViewEvent event) {
-
         Intent intent = new Intent(this, ViewEvent.class);
-        EditText editText;
-        editText = (EditText) findViewById(R.id.editText);
-        String event_Info = event.getName();
-        intent.putExtra(EXTRA_MESSAGE, event_Info);
+        EditText editText = (EditText) findViewById(R.id.editText);
+
+        String Title = event.getName();
+        Calendar calendar = Calendar.getInstance();
+        String StartTime = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+       // String StartTime = event.getStartTime().toString();
+        String EndTime = event.getEndTime().toString();
+        String Location = event.getLocation();
+        String Date = calendar.get(Calendar) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
+
+        intent.putExtra(EXTRA_MESSAGE0, Title);
+        intent.putExtra(EXTRA_MESSAGE1, StartTime);
+        intent.putExtra(EXTRA_MESSAGE2, EndTime);
+        intent.putExtra(EXTRA_MESSAGE3, Location);
+        intent.putExtra(EXTRA_MESSAGE4, Date);
+
         startActivity(intent);
     }
 
