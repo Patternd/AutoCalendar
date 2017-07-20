@@ -351,6 +351,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
             @Override
             public String interpretTime(int hour) {
+                if (hour == 12) {
+                    return "12 PM";
+                }
                 return hour > 11 ? (hour - 12) + " PM" : (hour == 0 ? "12 AM" : hour + " AM");
             }
         });
@@ -376,6 +379,10 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
         // <Matt> Initial call to first Title dialog. Also, set a global variable for time LMAO
         GlobalTime = time;
+
+        event_data.startHour = GlobalTime.get(Calendar.HOUR);
+        event_data.startMinute = GlobalTime.get(Calendar.MINUTE);
+
 
         setEntryVariable(2);
 
