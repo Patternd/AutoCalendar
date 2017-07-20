@@ -225,6 +225,10 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                 GlobalTime.set(Calendar.AM_PM, 0);
                 GlobalTime.set(Calendar.HOUR, event_data.startHour);
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3e92cc7a3ed26b9e2cdfa21d202d821afe3dd26b
             Calendar endTime = (Calendar) GlobalTime.clone();
             endTime.set(Calendar.HOUR, event_data.endHour);
             endTime.set(Calendar.HOUR_OF_DAY, event_data.endHour);
@@ -438,21 +442,38 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
     @Override
     public void onEventLongPress(WeekViewEvent event, RectF eventRect) {
-        Toast.makeText(this, "Long pressed event: " + event.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Removed " + event.getName() + " from your calendar.", Toast.LENGTH_SHORT).show();
+
+        
+
     }
 
     @Override
     public void onEmptyViewLongPress(Calendar time) {
 
-        // <Matt> Initial call to first Title dialog. Also, set a global variable for time LMAO
+        // <Matt> Initial call to first dialog. Also, set a global variable for time LMAO
         GlobalTime = time;
 
         int AM_PM = GlobalTime.get(Calendar.AM_PM);
         if (AM_PM == 0) {
             event_data.startHour = GlobalTime.get(Calendar.HOUR);
             event_data.startMinute = GlobalTime.get(Calendar.MINUTE);
+            if (event_data.startMinute < 10) {
+                Toast.makeText(this, "Chosen start time: " + event_data.startHour + ":" + "0" + event_data.startMinute + " AM", Toast.LENGTH_LONG).show();
+            }
+
+            else {
+                Toast.makeText(this, "Chosen start time: " + event_data.startHour + ":" + event_data.startMinute+ " AM", Toast.LENGTH_LONG).show();
+            }
         }
         else if (AM_PM == 1) {
+            if (event_data.startMinute < 10) {
+                Toast.makeText(this, "Chosen start time: " + GlobalTime.get(Calendar.HOUR) + ":" + "0" + GlobalTime.get(Calendar.MINUTE)+ " PM", Toast.LENGTH_LONG).show();
+            }
+
+            else {
+                Toast.makeText(this, "Chosen start time: " + GlobalTime.get(Calendar.HOUR) + ":" + GlobalTime.get(Calendar.MINUTE)+ " PM", Toast.LENGTH_LONG).show();
+            }
             GlobalTime.set(Calendar.AM_PM, 0);
             event_data.startHour = GlobalTime.get(Calendar.HOUR)+12;
             GlobalTime.set(Calendar.HOUR, event_data.startHour);
@@ -466,8 +487,6 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         event_data.endDay = GlobalTime.get(Calendar.DAY_OF_MONTH);
 
         setEntryVariable(2);
-
-
 
     }
 
