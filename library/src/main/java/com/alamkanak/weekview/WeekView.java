@@ -883,7 +883,11 @@ public class WeekView extends View {
 
         // Prepare the location of the event.
         if (event.getLocation() != null) {
-            bob.append(event.getLocation());
+            bob.append("\nLocation: " + event.getLocation());
+        }
+
+        if (event.getDescription() != null) {
+            bob.append("\nDescription: " + event.getDescription());
         }
 
         int availableHeight = (int) (rect.bottom - originalTop - mEventPadding * 2);

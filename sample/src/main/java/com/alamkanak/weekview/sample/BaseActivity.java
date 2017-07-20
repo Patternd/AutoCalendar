@@ -395,6 +395,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
             @Override
             public String interpretTime(int hour) {
+                if (hour == 12) {
+                    return "12 PM";
+                }
                 return hour > 11 ? (hour - 12) + " PM" : (hour == 0 ? "12 AM" : hour + " AM");
             }
         });
@@ -426,8 +429,6 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
         event_data.endHour = GlobalTime.get(Calendar.HOUR);
         event_data.endMinute = GlobalTime.get(Calendar.MINUTE);
-
-
 
         setEntryVariable(2);
 
