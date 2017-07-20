@@ -50,6 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
     public static final String EXTRA_MESSAGE2 = "2";
     public static final String EXTRA_MESSAGE3 = "3";
     public static final String EXTRA_MESSAGE4 = "4";
+    public static final String EXTRA_MESSAGE5 = "5";
     private static final int TYPE_DAY_VIEW = 1;
     private static final int TYPE_THREE_DAY_VIEW = 2;
     private static final int TYPE_WEEK_VIEW = 3;
@@ -272,18 +273,46 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
         EditText editText = (EditText) findViewById(R.id.editText);
 
         String Title = event.getName();
-        Calendar calendar = Calendar.getInstance();
-        String StartTime = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
-       // String StartTime = event.getStartTime().toString();
-        String EndTime = event.getEndTime().toString();
+        String tmpMinute = "";
+        String tmp1Minute = "";
+        String tmpHour = "";
+        String tmp1Hour = "";
+        String StartTime = "";
+        String EndTime = "";
+
+        if(event_data.startMinute <= 9){
+            tmpMinute = "0" + event_data.startMinute;
+            StartTime = String.valueOf(event_data.startHour) + ":" + String.valueOf(tmpMinute);
+        }
+        else if(event_data.startHour > 12){
+            StartTime = String.valueOf((event_data.startHour - 12));
+        }
+        else {
+            StartTime = String.valueOf(event_data.startHour) + ":" + String.valueOf(event_data.startMinute);
+        }
+
+        if(event_data.endMinute <= 9){
+            tmp1Minute = "0" + event_data.endMinute;
+            EndTime = String.valueOf(event_data.endHour) + ":" + String.valueOf(tmp1Minute);
+        }
+        else if(event_data.endHour > 12) {
+            EndTime = String.valueOf((event_data.endHour - 12));
+        }
+        else {
+            EndTime = String.valueOf(event_data.endHour) + ":" + String.valueOf(event_data.endMinute);
+        }
+
+
         String Location = event.getLocation();
-        String Date = calendar.get(Calendar) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
+        //String Date = calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.YEAR);
+        String Description = event.getDescription().toString();
 
         intent.putExtra(EXTRA_MESSAGE0, Title);
         intent.putExtra(EXTRA_MESSAGE1, StartTime);
         intent.putExtra(EXTRA_MESSAGE2, EndTime);
         intent.putExtra(EXTRA_MESSAGE3, Location);
-        intent.putExtra(EXTRA_MESSAGE4, Date);
+        //intent.putExtra(EXTRA_MESSAGE4, Date);
+        intent.putExtra(EXTRA_MESSAGE5, Description);
 
         startActivity(intent);
     }
@@ -391,6 +420,14 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
         // <Matt> Initial call to first Title dialog. Also, set a global variable for time LMAO
         GlobalTime = time;
+
+        event_data.startHour = GlobalTime.get(Calendar.HOUR);
+        event_data.startMinute = GlobalTime.get(Calendar.MINUTE);
+
+        event_data.endHour = GlobalTime.get(Calendar.HOUR);
+        event_data.endMinute = GlobalTime.get(Calendar.MINUTE);
+
+
 
         setEntryVariable(2);
 
