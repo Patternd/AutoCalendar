@@ -1,5 +1,6 @@
 package com.alamkanak.weekview.sample;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.widget.Button;
  */
     public class ModifyEvent extends AppCompatActivity {
 
+    private eventData event_data;
+    public static String deleteEvent_identifier = "Delete";
     private void editEvent(View v){
         Intent intent = new Intent(this, EditEvent.class);
 
@@ -19,14 +22,21 @@ import android.widget.Button;
     }
 
     private void deleteEvent(View v) {
-        Intent intent = new Intent(this, DeleteEvent.class);
-        startActivity(intent);
+        event_data.deleteEvent = true;
+        Intent intent;
+        intent = new Intent(this, EndTime.class);
+        intent.putExtra(deleteEvent_identifier, event_data.deleteEvent);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_modify_event);
+
+            Intent i = getIntent();
+            event_data = (eventData) i.getSerializableExtra("eventData");
 
             final Button edit = (Button) findViewById(R.id.button_edit);
             edit.setOnClickListener(new View.OnClickListener() {

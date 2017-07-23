@@ -45,9 +45,6 @@
         <activity
             android:name=".ModifyEvent"
             android:parentActivityName=".BasicActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".BasicActivity" />
         </activity>
 
         <activity
@@ -60,10 +57,7 @@
 
         <activity
             android:name=".DeleteEvent"
-            android:parentActivityName=".ModifyEvent">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ModifyEvent" />
+            android:parentActivityName=".BasicActivity">
         </activity>
 
         <activity

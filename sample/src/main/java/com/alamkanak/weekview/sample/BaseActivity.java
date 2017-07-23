@@ -40,6 +40,7 @@ import static com.alamkanak.weekview.sample.Description.description_identifier;
 import static com.alamkanak.weekview.sample.EndTime.end_hour_identifier;
 import static com.alamkanak.weekview.sample.EndTime.end_minute_identifier;
 import static com.alamkanak.weekview.sample.Location.location_identifier;
+import static com.alamkanak.weekview.sample.ModifyEvent.deleteEvent_identifier;
 import static com.alamkanak.weekview.sample.Title.title_identifier;
 import static com.alamkanak.weekview.sample.eventType.eventType_identifier;
 import static java.lang.String.valueOf;
@@ -112,7 +113,7 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
             case 0:
                 intent = new Intent(this, Title.class);
                 intent.putExtra("eventData", (Serializable) event_data);
-                startActivityForResult(intent,0);
+                startActivityForResult(intent, 0);
                 break;
             case 1:
                 intent = new Intent(this, EndTime.class);
@@ -122,17 +123,17 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
             case 2:
                 intent = new Intent(this, eventType.class);
                 intent.putExtra("eventData", (Serializable) event_data);
-                startActivityForResult(intent,2);
+                startActivityForResult(intent, 2);
                 break;
             case 3:
                 intent = new Intent(this, Location.class);
                 intent.putExtra("eventData", (Serializable) event_data);
-                startActivityForResult(intent,3);
+                startActivityForResult(intent, 3);
                 break;
             case 4:
                 intent = new Intent(this, Description.class);
                 intent.putExtra("eventData", (Serializable) event_data);
-                startActivityForResult(intent,4);
+                startActivityForResult(intent, 4);
                 break;
         }
     }
@@ -144,7 +145,9 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
 
 
         String event_Info = event.getName();
-        startActivity(intent);
+        intent = new Intent(this, ModifyEvent.class);
+        intent.putExtra("eventData", (Serializable) event_data);
+        startActivityForResult(intent, 5);
     }
 
 
@@ -225,6 +228,19 @@ public abstract class BaseActivity extends AppCompatActivity implements WeekView
                     String description = data.getStringExtra(description_identifier);
                     event_data.description = description;
                 }
+            }
+            case (5) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    event_data.deleteEvent = data.getBooleanExtra(deleteEvent_identifier, event_data.deleteEvent);
+                    if (event_data.deleteEvent == true){
+                        Intent intent = new Intent(this, DeleteEvent.class);
+                        intent.putExtra("eventData", (Serializable) event_data);
+                        startActivityForResult(intent, 6);
+                    }
+                }
+            }
+            case (6) : {
+                break;
             }
         }
         if (requestCode == 4) {

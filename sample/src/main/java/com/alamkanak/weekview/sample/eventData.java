@@ -9,4 +9,5 @@ public class eventData implements Serializable {
     int startHour, endHour, startMinute, endMinute, priority, startDay, endDay, startMonth, endMonth;
     String title, description, location;
     int eventType;
+    boolean deleteEvent = false;
 }
